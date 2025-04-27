@@ -31,8 +31,8 @@ class Array
 end
 
 module YamlExtensions
-  def load(*args)
-    super(*args).walk do |h|
+  def load(*args, **kwargs)
+    super(*args, **kwargs).walk do |h|
       h.keys.sort.reverse_each do |key|
         if key =~ /^<<<\d*$/
           h.deep_merge!(h.delete(key)) { |_, this, _| this }
